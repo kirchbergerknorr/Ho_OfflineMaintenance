@@ -1,0 +1,133 @@
+<?xml version="1.0"?><!--
+/*
+ * Magento H&O Offline Maintenance Page
+ *
+ * @category   H&O
+ * @package    Ho_OfflineMaintenance
+ * @copyright  Copyright (c) 2012 H&O (http://www.h-o.nl)
+ * @author     Paul Hachmang (paul@h-o.nl
+ * @licence    MIT
+ */
+-->
+<config>
+    <modules>
+	<Ho_OfflineMaintenance>
+	    <version>2.0.0</version>
+	</Ho_OfflineMaintenance>
+    </modules>
+    <global>
+	<blocks>
+	    <offlinemaintenance>
+		<class>Ho_OfflineMaintenance_Block</class>
+	    </offlinemaintenance>
+	</blocks>
+
+	<helpers>
+	    <offlinemaintenance>
+		<class>Ho_OfflineMaintenance_Helper</class>
+	    </offlinemaintenance>
+	</helpers>
+
+	<models>
+	    <offlinemaintenance>
+		<class>Ho_OfflineMaintenance_Model</class>
+	    </offlinemaintenance>
+	</models>
+
+    </global>
+    <stores>
+        <default>
+            <web>
+            <routers>
+                <standard>
+                <area>frontend</area>
+                <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
+                </standard>
+            </routers>
+            </web>
+        </default>
+    </stores>
+    <default>
+        <web>
+            <routers>
+            <standard>
+                <area>frontend</area>
+                <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
+            </standard>
+            </routers>
+        </web>
+        <dev>
+            <offlinemaintenance>
+                <enabled>0</enabled>
+                <custom_message>0</custom_message>
+                <message><![CDATA[
+<style>
+body {
+background:#777777 none repeat scroll 0 0;
+color:#FFFFFF;
+font-family:Helvetica,Arial,Verdana,sans-serif;
+font-size:12px;
+
+margin:0;
+padding:0;
+text-align:center;
+}
+h1
+{
+    margin:0px;
+    padding:0px;
+    margin-top:30%;
+    font-size: 25pt;
+    display:block;
+}
+h2
+{
+    padding:0px;
+    margin-top: 5px;
+    font-size: 18pt;
+}
+
+</style>
+</head>
+
+<body>
+<h1>We're sorry, but our website is under maintenance.</h1>
+<h2>Please enjoy a quick cup of espresso and then try refreshing this page</h2>
+]]>
+                </message>
+            </offlinemaintenance>
+        </dev>
+    </default>
+
+    <adminhtml>
+        <translate>
+            <modules>
+            <Ho_OfflineMaintenance>
+                <files>
+                <default>Ho_OfflineMaintenance.csv</default>
+                </files>
+            </Ho_OfflineMaintenance>
+            </modules>
+        </translate>
+        <acl>
+            <resources>
+            <admin>
+                <children>
+                <system>
+                    <children>
+                    <config>
+                        <children>
+                        <offlinemaintenance>
+                            <title>Offline Maintenance</title>
+                        </offlinemaintenance>
+                        </children>
+                    </config>
+                    </children>
+                </system>
+                </children>
+            </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+</config>
