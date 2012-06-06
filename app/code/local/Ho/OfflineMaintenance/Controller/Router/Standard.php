@@ -51,23 +51,28 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
     }
 
     /**
+     * Checks if the current request is allowed.
      * @return bool
      */
     public function isExcluded()
     {
-	    /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Exclude */
+        /** @var $coreHelper Mage_Core_Helper_Data */
+        $coreHelper = Mage::helper('core/data');
+        if (Mage::getStoreConfig(Mage_Core_Helper_Data::XML_PATH_DEV_ALLOW_IPS) && $coreHelper->isDevAllowed())
+        {
+            return true;
+        }
+
+        /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Exclude */
         $excludeHelper = Mage::helper('offlinemaintenance/exclude');
-
-        $value = $excludeHelper->getConfigValue();
-
+        $excludePaths = $excludeHelper->getConfigValue();
 
         $currentPath = Mage::app()->getRequest()->getPathInfo();
-
-        foreach($value as $key => $data)
+        foreach($excludePaths as $excludePath)
         {
-            if (strpos($currentPath, $data['url_path']) === 0)
+            if (strpos($currentPath, $excludePath['url_path']) === 0)
             {
-            return true;
+                return true;
             }
         }
 
