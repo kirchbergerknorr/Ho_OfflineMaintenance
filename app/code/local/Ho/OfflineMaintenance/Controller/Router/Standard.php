@@ -58,7 +58,7 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
     {
         /** @var $coreHelper Mage_Core_Helper_Data */
         $coreHelper = Mage::helper('core/data');
-        if (Mage::getStoreConfig(Mage_Core_Helper_Data::XML_PATH_DEV_ALLOW_IPS) && $coreHelper->isDevAllowed())
+        if (Mage::getStoreConfig('dev/restrict/allow_ips') && $coreHelper->isDevAllowed())
         {
             return true;
         }
