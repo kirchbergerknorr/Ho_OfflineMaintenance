@@ -25,18 +25,18 @@
  */
 ?>
 <?php
-class  Ho_OfflineMaintenance_Block_Adminhtml_System_Config_Exclude extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
+class  Ho_OfflineMaintenance_Block_Adminhtml_System_Config_Ips extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
 {
     /**
      * Prepare to render
      */
     protected function _prepareToRender()
     {
-        $this->addColumn('url_path', array(
-            'label' => $this->__('URL Path'),
-            'style' => 'width:300px',
+        $this->addColumn('ips', array(
+            'label' => $this->__('IP\'s'),
+            'style' => 'width:100px',
         ));
         $this->_addAfter = false;
-        $this->_addButtonLabel = $this->__('Add new rule');
+        $this->_addButtonLabel = $this->__('Add new IP');
     }
 }

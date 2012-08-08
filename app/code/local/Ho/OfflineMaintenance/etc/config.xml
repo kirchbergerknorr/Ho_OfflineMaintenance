@@ -1,59 +1,71 @@
 <?xml version="1.0"?><!--
-/*
- * Magento H&O Offline Maintenance Page
+/**
+ * H&O Module Ho_OfflineMaintenance
+ * Fork of the ArsOnIt_OfflineMaintenance module: http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
  *
- * @category   H&O
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the H&O Commercial License
+ * that is bundled with this package in the file LICENSE_HO.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.h-o.nl/license
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@h-o.com so we can send you a copy immediately.
+ *
+ * @category    Ho
+ * @package     Ho_OfflineMaintenance
+ * @copyright   Copyright (c) 2012 H&O (http://www.h-o.nl/)
+ * @license     H&O Commercial License (http://www.h-o.nl/license)
+ */
+/**
+ * @category   Ho
  * @package    Ho_OfflineMaintenance
- * @copyright  Copyright (c) 2012 H&O (http://www.h-o.nl)
- * @author     Paul Hachmang (paul@h-o.nl
- * @licence    MIT
+ * @author     H&O Developers <info@h-o.nl>
  */
 -->
 <config>
     <modules>
-	<Ho_OfflineMaintenance>
-	    <version>2.0.0</version>
-	</Ho_OfflineMaintenance>
+        <Ho_OfflineMaintenance>
+            <version>2.0.0</version>
+        </Ho_OfflineMaintenance>
     </modules>
     <global>
-	<blocks>
-	    <offlinemaintenance>
-		<class>Ho_OfflineMaintenance_Block</class>
-	    </offlinemaintenance>
-	</blocks>
-
-	<helpers>
-	    <offlinemaintenance>
-		<class>Ho_OfflineMaintenance_Helper</class>
-	    </offlinemaintenance>
-	</helpers>
-
-	<models>
-	    <offlinemaintenance>
-		<class>Ho_OfflineMaintenance_Model</class>
-	    </offlinemaintenance>
-	</models>
-
+        <blocks>
+            <ho_offlinemaintenance>
+                <class>Ho_OfflineMaintenance_Block</class>
+            </ho_offlinemaintenance>
+        </blocks>
+        <helpers>
+            <ho_offlinemaintenance>
+                <class>Ho_OfflineMaintenance_Helper</class>
+            </ho_offlinemaintenance>
+        </helpers>
+        <models>
+            <ho_offlinemaintenance>
+                <class>Ho_OfflineMaintenance_Model</class>
+            </ho_offlinemaintenance>
+        </models>
     </global>
     <stores>
         <default>
             <web>
-            <routers>
-                <standard>
-                <area>frontend</area>
-                <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
-                </standard>
-            </routers>
+                <routers>
+                    <standard>
+                        <area>frontend</area>
+                        <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
+                    </standard>
+                </routers>
             </web>
         </default>
     </stores>
     <default>
         <web>
             <routers>
-            <standard>
-                <area>frontend</area>
-                <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
-            </standard>
+                <standard>
+                    <area>frontend</area>
+                    <class>Ho_OfflineMaintenance_Controller_Router_Standard</class>
+                </standard>
             </routers>
         </web>
         <dev>
@@ -102,30 +114,30 @@ h2
     <adminhtml>
         <translate>
             <modules>
-            <Ho_OfflineMaintenance>
-                <files>
-                <default>Ho_OfflineMaintenance.csv</default>
-                </files>
-            </Ho_OfflineMaintenance>
+                <Ho_OfflineMaintenance>
+                    <files>
+                        <default>Ho_OfflineMaintenance.csv</default>
+                    </files>
+                </Ho_OfflineMaintenance>
             </modules>
         </translate>
         <acl>
             <resources>
-            <admin>
-                <children>
-                <system>
+                <admin>
                     <children>
-                    <config>
-                        <children>
-                        <offlinemaintenance>
-                            <title>Offline Maintenance</title>
-                        </offlinemaintenance>
-                        </children>
-                    </config>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ho_offlinemaintenance>
+                                            <title>Offline Maintenance</title>
+                                        </ho_offlinemaintenance>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
                     </children>
-                </system>
-                </children>
-            </admin>
+                </admin>
             </resources>
         </acl>
     </adminhtml>

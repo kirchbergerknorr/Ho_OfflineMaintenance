@@ -1,18 +1,41 @@
 <!--
-/*
- * Magento H&O Offline Maintenance Page
+/**
+ * H&O Module Ho_OfflineMaintenance
+ * Fork of the ArsOnIt_OfflineMaintenance module: http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
  *
- * @category   H&O
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the H&O Commercial License
+ * that is bundled with this package in the file LICENSE_HO.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.h-o.nl/license
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@h-o.com so we can send you a copy immediately.
+ *
+ * @category    Ho
+ * @package     Ho_OfflineMaintenance
+ * @copyright   Copyright (c) 2012 H&O (http://www.h-o.nl/)
+ * @license     H&O Commercial License (http://www.h-o.nl/license)
+ */
+/**
+ * @category   Ho
  * @package    Ho_OfflineMaintenance
- * @copyright  Copyright (c) 2012 H&O (http://www.h-o.nl)
- * @author     Paul Hachmang (paul@h-o.nl
- * @licence    MIT
+ * @author     H&O Developers <info@h-o.nl>
  */
 -->
 <config>
     <sections>
         <dev>
             <groups>
+                <restrict>
+                    <fields>
+                        <allow_ips>
+                            <frontend_model>ho_offlinemaintenance/adminhtml_system_config_ips</frontend_model>
+                            <backend_model>ho_offlinemaintenance/system_config_arrayfield_ips</backend_model>
+                        </allow_ips>
+                    </fields>
+                </restrict>
                 <offlinemaintenance translate="label comment">
                     <label>Offline Settings</label>
                     <comment><![CDATA[<div style="margin:-15px -20px 10px -20px; padding: 8px 20px; background: #e7efef; border-bottom: 1px solid #cddddd;">
@@ -64,8 +87,8 @@
                         <exclude_pages translate="label comment">
                             <label>Exclude Pages</label>
                             <comment><![CDATA[You can add your own paths to specific paths to exclude from the offline maintenance. Start with a /, ex.: <code>/api</code>]]></comment>
-                            <frontend_model>offlinemaintenance/adminhtml_system_config_exclude</frontend_model>
-                            <backend_model>offlinemaintenance/system_config_exclude</backend_model>
+                            <frontend_model>ho_offlinemaintenance/adminhtml_system_config_exclude</frontend_model>
+                            <backend_model>ho_offlinemaintenance/system_config_arrayfield_exclude</backend_model>
                             <sort_order>50</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

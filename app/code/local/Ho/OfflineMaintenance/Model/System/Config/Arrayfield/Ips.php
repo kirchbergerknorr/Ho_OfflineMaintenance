@@ -19,24 +19,15 @@
  * @license     H&O Commercial License (http://www.h-o.nl/license)
  */
 /**
+ * Backend for serialized array data
+ *
  * @category   Ho
  * @package    Ho_OfflineMaintenance
  * @author     H&O Developers <info@h-o.nl>
  */
 ?>
 <?php
-class  Ho_OfflineMaintenance_Block_Adminhtml_System_Config_Exclude extends Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
+class Ho_OfflineMaintenance_Model_System_Config_Arrayfield_Ips extends Ho_OfflineMaintenance_Model_System_Config_Arrayfield
 {
-    /**
-     * Prepare to render
-     */
-    protected function _prepareToRender()
-    {
-        $this->addColumn('url_path', array(
-            'label' => $this->__('URL Path'),
-            'style' => 'width:300px',
-        ));
-        $this->_addAfter = false;
-        $this->_addButtonLabel = $this->__('Add new rule');
-    }
+    protected $_helper = 'ho_offlinemaintenance/arrayfield_ips';
 }

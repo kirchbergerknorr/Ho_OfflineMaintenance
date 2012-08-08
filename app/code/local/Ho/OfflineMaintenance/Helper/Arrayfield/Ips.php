@@ -24,35 +24,48 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-/**
- * Backend for serialized array data
- *
- */
-class Ho_OfflineMaintenance_Model_System_Config_Exclude extends Mage_Core_Model_Config_Data
+
+class Ho_OfflineMaintenance_Helper_Arrayfield_Ips extends Mage_Core_Helper_Abstract
 {
     /**
-     * Process data after load
+     * Make value readable by Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
+     *
+     * @param mixed $value
+     * @return array
      */
-    protected function _afterLoad()
+    public function makeArrayFieldValue($value)
     {
-        $value = $this->getValue();
+        $value = explode(',',$value);
 
-        /** @var $helperShow Ho_OfflineMaintenance_Helper_Exclude */
-        $helperShow = Mage::helper('offlinemaintenance/exclude');
-        $value = $helperShow->makeArrayFieldValue($value);
-        $this->setValue($value);
+        $ips = array();
+        foreach($value as $ip)
+        {
+            $ips[] = array('ips' => $ip);
+        }
+
+        return $ips;
     }
 
     /**
-     * Prepare data before save
+     * Make value ready for store
+     *
+     * @param mixed $value
+     * @return string
      */
-    protected function _beforeSave()
+    public function makeStorableArrayFieldValue($value)
     {
-        $value = $this->getValue();
+        $ips = array();
+        unset($ips['__empty']);
+        foreach ($value as $ip)
+        {
+            if(isset($ip['ips']))
+            {
+                $ips[] = $ip['ips'];
+            }
+        }
+        sort($ips);
 
-        /** @var $helperShow Ho_OfflineMaintenance_Helper_Exclude */
-        $helperShow = Mage::helper('offlinemaintenance/exclude');
-        $value = $helperShow->makeStorableArrayFieldValue($value);
-        $this->setValue($value);
+        return implode(',',$ips);
     }
+
 }
