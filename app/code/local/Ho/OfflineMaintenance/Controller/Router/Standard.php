@@ -28,20 +28,27 @@
 class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Controller_Varien_Router_Standard
 {
 
+    /**
+     * Check if the request is matched.
+     *
+     * @param Zend_Controller_Request_Http $request
+     * @return bool
+     */
     public function match(Zend_Controller_Request_Http $request)
     {
         if (!$this->isAllowedToViewPage($request))
         {
             Mage::getStoreConfigFlag('dev/offlinemaintenance/custom_message', $request->getStoreCodeFromPath())
-                ? $this->_sendCustomMessage()
+                ? $this->_sendCustomMessage($request)
                 : $this->_send503();
 
         } elseif (Mage::getStoreConfig('dev/offlinemaintenance/showreminder', $request->getStoreCodeFromPath()))
         {
+            /** @var $front Mage_Core_Controller_Varien_Front */
             $front = $this->getFront();
+
             $front->getResponse()->appendBody('<div style="height:12px; background:red; color: white; position:relative;
                 width:100%;padding:3px; z-index:100000;text-trasform:capitalize;">Offline</div>');
-
         }
 
 		return parent::match($request);
@@ -52,12 +59,11 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
      * Checks if the current request is allowed.
      *
      * @param Zend_Controller_Request_Http $request
-     *
      * @return bool
      */
     public function isAllowedToViewPage(Zend_Controller_Request_Http $request)
     {
-        //Is offline maintenance enabled?
+        // Is offline maintenance enabled?
         if (Mage::getStoreConfigFlag('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath()) === false)
         {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Offline Maintemance is disabled'));
@@ -67,7 +73,7 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         }
 
 
-        //Is developermode is enabled?
+        // Is developermode is enabled?
         if (Mage::getIsDeveloperMode())
         {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developermode is enabled'));
@@ -77,10 +83,12 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         }
 
 
-        //Is the ip allowed by the client restriction?
+        // Is the ip allowed by the client restriction?
         /** @var $coreHelper Mage_Core_Helper_Data */
         $coreHelper = Mage::helper('core/data');
-        if ($coreHelper->isDevAllowed())
+        if (Mage::getStoreConfig(Mage_Core_Helper_Data::XML_PATH_DEV_ALLOW_IPS, $request->getStoreCodeFromPath())
+            && $coreHelper->isDevAllowed()
+        )
         {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developer is in the IP list.'));
             return true;
@@ -89,7 +97,7 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         }
 
 
-        //Is the path always allowed?
+        // Is the path always allowed?
         /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Arrayfield_Exclude */
         $excludeHelper = Mage::helper('ho_offlinemaintenance/arrayfield_exclude');
         $excludePaths = $excludeHelper->getConfigValue();
@@ -102,7 +110,6 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
                 $excluded = true;
             }
         }
-
         if ($excluded)
         {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: URI is in the exclude list.'));
@@ -112,9 +119,11 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         }
 
 
-        //Is user logged into the admin panel?
+        // Is user logged into the admin panel?
         Mage::getSingleton('core/session', array('name' => 'adminhtml'));
-        if(Mage::getSingleton('admin/session')->isLoggedIn())
+        /** @var $adminSession Mage_Admin_Model_Session */
+        $adminSession = Mage::getSingleton('admin/session');
+        if($adminSession->isLoggedIn())
         {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: User is logged in to the admin panel.'));
             return true;
@@ -127,18 +136,30 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         return false;
     }
 
+
+    /**
+     * Send a 503 header.
+     */
     protected function _send503()
     {
-        include_once Mage::getBaseDir() . '/errors/503.php';
+        include_once Mage::getBaseDir().'/errors/503.php';
         exit;
     }
 
 
-    protected function _sendCustomMessage()
+    /**
+     * Send a custom message, configured in the admin panel.
+     *
+     * @param Zend_Controller_Request_Http $request
+     */
+    protected function _sendCustomMessage(Zend_Controller_Request_Http $request)
     {
         Mage::getSingleton('core/session', array('name' => 'front'));
 
+        /** @var $front Mage_Core_Controller_Varien_Front */
         $front = $this->getFront();
+
+        /** @var $response Mage_Core_Controller_Response_Http */
         $response = $front->getResponse();
         $response->setHeader('HTTP/1.1','503 Service Temporarily Unavailable');
         $response->setHeader('Status','503 Service Temporarily Unavailable');
@@ -147,6 +168,9 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         $response->setBody(html_entity_decode( Mage::getStoreConfig('dev/offlinemaintenance/message', $request->getStoreCodeFromPath()), ENT_QUOTES, "utf-8" ));
         $response->sendHeaders();
         $response->outputBody();
+
+        // We are done, we can exit now.
+        exit;
     }
 
 
