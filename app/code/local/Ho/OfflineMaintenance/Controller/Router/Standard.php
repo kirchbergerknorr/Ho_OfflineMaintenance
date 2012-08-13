@@ -58,45 +58,72 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
     public function isAllowedToViewPage(Zend_Controller_Request_Http $request)
     {
         //Is offline maintenance enabled?
-        if (Mage::getStoreConfig('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath()))
+        if (Mage::getStoreConfigFlag('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath()) === false)
         {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Offline Maintemance is disabled'));
             return true;
+        } else {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Offline Maintemance is enabled.'));
         }
+
 
         //Is developermode is enabled?
         if (Mage::getIsDeveloperMode())
         {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developermode is enabled'));
             return true;
+        } else {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developermode disabled.'));
         }
+
 
         //Is the ip allowed by the client restriction?
         /** @var $coreHelper Mage_Core_Helper_Data */
         $coreHelper = Mage::helper('core/data');
         if ($coreHelper->isDevAllowed())
         {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developer is in the IP list.'));
             return true;
+        } else {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developer isn\'t in the IP list.'));
         }
+
 
         //Is the path always allowed?
         /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Arrayfield_Exclude */
         $excludeHelper = Mage::helper('ho_offlinemaintenance/arrayfield_exclude');
         $excludePaths = $excludeHelper->getConfigValue();
         $currentPath = Mage::app()->getRequest()->getPathInfo();
+        $excluded = false;
         foreach($excludePaths as $excludePath)
         {
             if (strpos($currentPath, $excludePath['url_path']) === 0)
             {
-                return true;
+                $excluded = true;
             }
         }
+
+        if ($excluded)
+        {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: URI is in the exclude list.'));
+            return true;
+        } else {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('URI is not in the exclude list.'));
+        }
+
 
         //Is user logged into the admin panel?
         Mage::getSingleton('core/session', array('name' => 'adminhtml'));
         if(Mage::getSingleton('admin/session')->isLoggedIn())
         {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: User is logged in to the admin panel.'));
             return true;
+        } else {
+            Mage::log(Mage::helper('ho_offlinemaintenance')->__('User is not logged in to the admin panel.'));
         }
 
+
+        Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER DISALLOWED: Didn\'t match conditions'));
         return false;
     }
 
