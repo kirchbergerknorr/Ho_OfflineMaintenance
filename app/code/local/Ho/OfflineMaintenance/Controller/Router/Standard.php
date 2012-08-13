@@ -79,7 +79,7 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
 
         //Is the path always allowed?
         /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Arrayfield_Exclude */
-        $excludeHelper = Mage::helper('ho_offlinemaintenance/exclude');
+        $excludeHelper = Mage::helper('ho_offlinemaintenance/arrayfield_exclude');
         $excludePaths = $excludeHelper->getConfigValue();
         $currentPath = Mage::app()->getRequest()->getPathInfo();
         foreach($excludePaths as $excludePath)
