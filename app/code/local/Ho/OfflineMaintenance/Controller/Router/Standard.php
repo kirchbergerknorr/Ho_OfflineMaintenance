@@ -66,7 +66,6 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         // Is offline maintenance enabled?
         if (Mage::getStoreConfigFlag('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath()) === false)
         {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Offline Maintemance is disabled'));
             return true;
         } else {
             Mage::log(Mage::helper('ho_offlinemaintenance')->__('Offline Maintemance is enabled.'));
