@@ -34,6 +34,15 @@
                             <frontend_model>ho_offlinemaintenance/adminhtml_system_config_ips</frontend_model>
                             <backend_model>ho_offlinemaintenance/system_config_arrayfield_ips</backend_model>
                         </allow_ips>
+                        <current_ip translate="label comment">
+                            <label>Current Ip</label>
+                            <comment><![CDATA[This is the IP of the current connection.]]></comment>
+                            <frontend_model>ho_offlinemaintenance/adminhtml_system_config_currentip</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </current_ip>
                     </fields>
                 </restrict>
                 <offlinemaintenance translate="label comment">
