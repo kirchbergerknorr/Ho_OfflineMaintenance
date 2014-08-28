@@ -68,17 +68,17 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         {
             return true;
         } else {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Offline Maintemance is enabled.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Offline Maintemance is enabled.'));
         }
 
 
         // Is developermode is enabled?
         if (Mage::getIsDeveloperMode())
         {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developermode is enabled'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developermode is enabled'));
             return true;
         } else {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developermode disabled.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developermode disabled.'));
         }
 
 
@@ -89,10 +89,10 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
             && $coreHelper->isDevAllowed()
         )
         {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developer is in the IP list.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: Developer is in the IP list.'));
             return true;
         } else {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developer isn\'t in the IP list.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('Developer isn\'t in the IP list.'));
         }
 
 
@@ -111,10 +111,10 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         }
         if ($excluded)
         {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: URI is in the exclude list.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: URI is in the exclude list.'));
             return true;
         } else {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('URI is not in the exclude list.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('URI is not in the exclude list.'));
         }
 
 
@@ -124,14 +124,14 @@ class Ho_OfflineMaintenance_Controller_Router_Standard extends Mage_Core_Control
         $adminSession = Mage::getSingleton('admin/session');
         if($adminSession->isLoggedIn())
         {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: User is logged in to the admin panel.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER ALLOWED: User is logged in to the admin panel.'));
             return true;
         } else {
-            Mage::log(Mage::helper('ho_offlinemaintenance')->__('User is not logged in to the admin panel.'));
+//            Mage::log(Mage::helper('ho_offlinemaintenance')->__('User is not logged in to the admin panel.'));
         }
 
 
-        Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER DISALLOWED: Didn\'t match conditions'));
+//        Mage::log(Mage::helper('ho_offlinemaintenance')->__('USER DISALLOWED: Didn\'t match conditions'));
         return false;
     }
 
