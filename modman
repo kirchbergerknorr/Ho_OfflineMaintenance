@@ -1,2 +1,4 @@
-app/code/local/Ho/OfflineMaintenance       app/code/local/Ho/OfflineMaintenance
-app/etc/modules/*                          app/etc/modules
+app/code/local/Ho/OfflineMaintenance              app/code/local/Ho/OfflineMaintenance
+app/etc/modules/*                                 app/etc/modules
+app/design/adminhtml/default/default/layout/ho/*  app/design/adminhtml/default/default/layout/ho/
+skin/adminhtml/default/default/ho/*               skin/adminhtml/default/default/ho/

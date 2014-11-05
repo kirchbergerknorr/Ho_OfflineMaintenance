@@ -1,0 +1,34 @@
+/**
+ * Ho_OfflineMaintenance
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the H&O Commercial License
+ * that is bundled with this package in the file LICENSE_HO.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.h-o.nl/license
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@h-o.com so we can send you a copy immediately.
+ *
+ * @category  Ho
+ * @package   Ho_OfflineMaintenance
+ * @author    Paul Hachmang – H&O <info@h-o.nl>
+ * @copyright 2014 Copyright © H&O (http://www.h-o.nl/)
+ * @license   H&O Commercial License (http://www.h-o.nl/license)
+ */
+
+.header {
+    background: #3a565f;
+    background: -moz-linear-gradient(top,  #3a565f 0%, #092023 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3a565f), color-stop(100%,#092023));
+    background: -webkit-linear-gradient(top,  #3a565f 0%,#092023 100%);
+    background: -o-linear-gradient(top,  #3a565f 0%,#092023 100%);
+    background: -ms-linear-gradient(top,  #3a565f 0%,#092023 100%);
+    background: linear-gradient(to bottom,  #3a565f 0%,#092023 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a565f', endColorstr='#092023',GradientType=0 );
+}
+/*.header-top {border-bottom: 1px solid #70797C;}*/
+#page-help-link {
+    display:none;
+}

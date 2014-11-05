@@ -46,8 +46,10 @@ class Ho_OfflineMaintenance_Controller_Router_Standard
             /** @var $front Mage_Core_Controller_Varien_Front */
             $front = $this->getFront();
 
-            $front->getResponse()->appendBody('<div style="height:12px; background:red; color: white; position:relative;
-                width:100%;padding:3px; z-index:100000; text-transform:capitalize;">Offline</div>');
+            $offlineText = Mage::helper('ho_offlinemaintenance')->__('Offline Mode Enabled');
+            $front->getResponse()->appendBody(
+                '<div style="line-height:22px; background:#d92b28; color: white; position:relative; text-align: center;
+                width:100%; padding:3px; z-index:100000; text-transform:uppercase;">' .$offlineText.'</div>');
         }
 
         return parent::match($request);
@@ -62,11 +64,9 @@ class Ho_OfflineMaintenance_Controller_Router_Standard
      */
     public function isAllowedToViewPage(Zend_Controller_Request_Http $request)
     {
-        // Is offline maintenance enabled?
-        if (Mage::getStoreConfigFlag('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath()) === false) {
-            return true;
+        if (Mage::helper('ho_offlinemaintenance')->isOffline()) {
+            return false;
         }
-
 
         // Is developermode is enabled?
         if (Mage::getIsDeveloperMode()) {

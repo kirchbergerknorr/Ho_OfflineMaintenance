@@ -34,7 +34,7 @@
                             <frontend_model>ho_offlinemaintenance/adminhtml_system_config_ips</frontend_model>
                             <backend_model>ho_offlinemaintenance/system_config_arrayfield_ips</backend_model>
                         </allow_ips>
-                        <current_ip translate="label comment">
+                        <current_ip translate="label comment" module="ho_offlinemaintenance">
                             <label>Current Ip</label>
                             <comment><![CDATA[This is the IP of the current connection.]]></comment>
                             <frontend_model>ho_offlinemaintenance/adminhtml_system_config_currentip</frontend_model>
@@ -45,7 +45,7 @@
                         </current_ip>
                     </fields>
                 </restrict>
-                <offlinemaintenance translate="label comment">
+                <offlinemaintenance translate="label comment" module="ho_offlinemaintenance">
                     <label>Offline Settings</label>
                     <comment><![CDATA[<div style="margin:-15px -20px 10px -20px; padding: 8px 20px; background: #e7efef; border-bottom: 1px solid #cddddd;">
                         To view the website during offline mode you'll need to log in to the admin panel or add your IP to the "Developer Client Restrictions" section.
@@ -56,7 +56,7 @@
                     <show_in_website>0</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <enabled translate="label">
+                        <enabled translate="label" module="ho_offlinemaintenance">
                             <label>Store Offline</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -65,7 +65,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </enabled>
-                        <custom_message translate="label">
+                        <custom_message translate="label" module="ho_offlinemaintenance">
                             <label>Custom Message</label>
                             <comment>Show custom message instead of the default 503 page.</comment>
                             <frontend_type>select</frontend_type>
@@ -75,7 +75,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </custom_message>
-                        <message translate="label">
+                        <message translate="label" module="ho_offlinemaintenance">
                             <label>Message</label>
                             <frontend_type>textarea</frontend_type>
                             <depends><custom_message>1</custom_message></depends>
@@ -84,8 +84,17 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </message>
-                        <showreminder translate="label">
-                            <label>Show Website Status </label>
+                        <showreminder_admin translate="label" module="ho_offlinemaintenance">
+                            <label>Show Website Status Admin</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showreminder_admin>
+                        <showreminder translate="label" module="ho_offlinemaintenance">
+                            <label>Show Website Status Frontend</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>40</sort_order>
@@ -93,7 +102,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </showreminder>
-                        <exclude_pages translate="label comment">
+                        <exclude_pages translate="label comment" module="ho_offlinemaintenance">
                             <label>Exclude Pages</label>
                             <comment><![CDATA[You can add your own paths to specific paths to exclude from the offline maintenance. Start with a /, ex.: <code>/api</code>]]></comment>
                             <frontend_model>ho_offlinemaintenance/adminhtml_system_config_exclude</frontend_model>

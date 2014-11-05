@@ -19,14 +19,29 @@
  * @copyright   Copyright (c) 2014 H&O (http://www.h-o.nl/)
  * @license     H&O Commercial License (http://www.h-o.nl/license)
  */
-/**
- * @category   Ho
- * @package    Ho_OfflineMaintenance
- * @author     H&O Developers <info@h-o.nl>
- */
+
 ?>
 <?php
 class Ho_OfflineMaintenance_Helper_Data
     extends Mage_Core_Helper_Abstract
 {
+    public function getAdminhtmlCss()
+    {
+        if ($this->isOffline() && Mage::getStoreConfigFlag('dev/offlinemaintenance/showreminder_admin')) {
+            return 'ho/offlinemaintenance/offline.css';
+        }
+
+        return 'ho/offlinemaintenance/online.css';
+    }
+
+    public function isOffline()
+    {
+        // Is offline maintenance enabled?
+        $request = Mage::app()->getRequest();
+        if (Mage::getStoreConfigFlag('dev/offlinemaintenance/enabled', $request->getStoreCodeFromPath())) {
+            return true;
+        }
+
+        return false;
+    }
 }

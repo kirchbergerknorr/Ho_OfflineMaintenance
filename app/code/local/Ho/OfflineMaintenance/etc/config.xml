@@ -72,6 +72,8 @@
             <offlinemaintenance>
                 <enabled>0</enabled>
                 <custom_message>0</custom_message>
+                <showreminder>0</showreminder>
+                <showreminder_admin>1</showreminder_admin>
                 <message><![CDATA[
 <style>
 body {
@@ -112,6 +114,13 @@ h2
     </default>
 
     <adminhtml>
+        <layout>
+            <updates>
+                <ho_offlinemaintenance module="ho_simplebundle">
+                    <file>ho/offlinemaintenance.xml</file>
+                </ho_offlinemaintenance>
+            </updates>
+        </layout>
         <translate>
             <modules>
                 <Ho_OfflineMaintenance>
@@ -121,25 +130,5 @@ h2
                 </Ho_OfflineMaintenance>
             </modules>
         </translate>
-        <acl>
-            <resources>
-                <admin>
-                    <children>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <ho_offlinemaintenance>
-                                            <title>Offline Maintenance</title>
-                                        </ho_offlinemaintenance>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
     </adminhtml>
-
 </config>
