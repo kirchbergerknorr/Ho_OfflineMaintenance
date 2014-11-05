@@ -35,11 +35,10 @@ class Ho_OfflineMaintenance_Helper_Arrayfield_Ips extends Mage_Core_Helper_Abstr
      */
     public function makeArrayFieldValue($value)
     {
-        $value = explode(',',$value);
+        $value = explode(',', $value);
 
         $ips = array();
-        foreach($value as $ip)
-        {
+        foreach ($value as $ip) {
             $ips[] = array('ips' => $ip);
         }
 
@@ -56,16 +55,13 @@ class Ho_OfflineMaintenance_Helper_Arrayfield_Ips extends Mage_Core_Helper_Abstr
     {
         $ips = array();
         unset($ips['__empty']);
-        foreach ($value as $ip)
-        {
-            if(isset($ip['ips']))
-            {
+        foreach ($value as $ip) {
+            if (isset($ip['ips'])) {
                 $ips[] = $ip['ips'];
             }
         }
         sort($ips);
 
-        return implode(',',$ips);
+        return implode(',', $ips);
     }
-
 }

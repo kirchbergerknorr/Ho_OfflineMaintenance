@@ -38,9 +38,8 @@ class Ho_OfflineMaintenance_Helper_Arrayfield_Exclude extends Ho_OfflineMaintena
     {
         $result = array();
         unset($value['__empty']);
-        foreach ($value as $key => $data) {
-            if (strlen($data['url_path']) > 0)
-            {
+        foreach ($value as $data) {
+            if (strlen($data['url_path']) > 0) {
                 $result[] = $data;
             }
         }
@@ -57,11 +56,9 @@ class Ho_OfflineMaintenance_Helper_Arrayfield_Exclude extends Ho_OfflineMaintena
     {
         $result = array();
         unset($value['__empty']);
-        foreach ($value as $_id => $row) {
-            if (   !is_array($row)
-            || !array_key_exists('url_path', $row)
-            )
-            {
+        foreach ($value as $row) {
+            if (!is_array($row)
+                || !array_key_exists('url_path', $row)) {
                 continue;
             }
             $result[] = $row['url_path'];

@@ -1,7 +1,8 @@
 <?php
 /**
  * H&O Module Ho_OfflineMaintenance
- * Fork of the ArsOnIt_OfflineMaintenance module: http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
+ * Fork of the ArsOnIt_OfflineMaintenance module:
+ * http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
  *
  * NOTICE OF LICENSE
  *
@@ -15,7 +16,7 @@
  *
  * @category    Ho
  * @package     Ho_OfflineMaintenance
- * @copyright   Copyright (c) 2012 H&O (http://www.h-o.nl/)
+ * @copyright   Copyright (c) 2014 H&O (http://www.h-o.nl/)
  * @license     H&O Commercial License (http://www.h-o.nl/license)
  */
 /**
@@ -35,7 +36,7 @@ abstract class Ho_OfflineMaintenance_Helper_Arrayfield extends Mage_Core_Helper_
      */
     protected function _fixQty($qty)
     {
-	    return (!empty($qty) ? (float)$qty : null);
+        return (!empty($qty) ? (float)$qty : null);
     }
 
     /**
@@ -94,37 +95,13 @@ abstract class Ho_OfflineMaintenance_Helper_Arrayfield extends Mage_Core_Helper_
             return false;
         }
         unset($value['__empty']);
-        foreach ($value as $_id => $row) {
+        foreach ($value as $row) {
             if (!is_string($row)) {
                 return false;
             }
         }
         return true;
     }
-
-    /**
-     * Encode value to be used in Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
-     *
-     * @param array
-     * @return array
-     */
-//    abstract protected function _encodeArrayFieldValue(array $value);
-
-    /**
-     * Decode value from used in Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract
-     *
-     * @param array
-     * @return array
-     */
-//    abstract protected function _decodeArrayFieldValue(array $value);
-
-    /**
-     * Retrieve min_sale_qty value from config
-     *
-     * @param mixed $store
-     * @return float|null
-     */
-//    abstract public function getConfigValue($store = null);
 
     /**
      * Make value readable by Mage_Adminhtml_Block_System_Config_Form_Field_Array_Abstract

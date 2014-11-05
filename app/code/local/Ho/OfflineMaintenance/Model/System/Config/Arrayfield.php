@@ -1,7 +1,8 @@
 <?php
 /**
  * H&O Module Ho_OfflineMaintenance
- * Fork of the ArsOnIt_OfflineMaintenance module: http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
+ * Fork of the ArsOnIt_OfflineMaintenance module:
+ * http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
  *
  * NOTICE OF LICENSE
  *
@@ -15,7 +16,7 @@
  *
  * @category    Ho
  * @package     Ho_OfflineMaintenance
- * @copyright   Copyright (c) 2012 H&O (http://www.h-o.nl/)
+ * @copyright   Copyright (c) 2014 H&O (http://www.h-o.nl/)
  * @license     H&O Commercial License (http://www.h-o.nl/license)
  */
 /**
@@ -27,7 +28,8 @@
  */
 ?>
 <?php
-abstract class Ho_OfflineMaintenance_Model_System_Config_Arrayfield extends Mage_Core_Model_Config_Data
+abstract class Ho_OfflineMaintenance_Model_System_Config_Arrayfield
+    extends Mage_Core_Model_Config_Data
 {
     protected $_helper = '';
 
@@ -38,7 +40,7 @@ abstract class Ho_OfflineMaintenance_Model_System_Config_Arrayfield extends Mage
     {
         $value = $this->getValue();
 
-        /** @var $helperShow Ho_OfflineMaintenance_Helper_Exclude */
+        /** @var $helperShow Mage_Core_Helper_Abstract */
         $helperShow = Mage::helper($this->_helper);
         $value = $helperShow->makeArrayFieldValue($value);
         $this->setValue($value);
@@ -51,7 +53,7 @@ abstract class Ho_OfflineMaintenance_Model_System_Config_Arrayfield extends Mage
     {
         $value = $this->getValue();
 
-        /** @var $helperShow Ho_OfflineMaintenance_Helper_Exclude */
+        /** @var $helperShow Mage_Core_Helper_Abstract */
         $helperShow = Mage::helper($this->_helper);
         $value = $helperShow->makeStorableArrayFieldValue($value);
         $this->setValue($value);

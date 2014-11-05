@@ -1,7 +1,8 @@
 <?php
 /**
  * H&O Module Ho_OfflineMaintenance
- * Fork of the ArsOnIt_OfflineMaintenance module: http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
+ * Fork of the ArsOnIt_OfflineMaintenance module:
+ * http://www.magentocommerce.com/magento-connect/maintenance-page-artson-it.html
  *
  * NOTICE OF LICENSE
  *
@@ -15,7 +16,7 @@
  *
  * @category    Ho
  * @package     Ho_OfflineMaintenance
- * @copyright   Copyright (c) 2012 H&O (http://www.h-o.nl/)
+ * @copyright   Copyright (c) 2014 H&O (http://www.h-o.nl/)
  * @license     H&O Commercial License (http://www.h-o.nl/license)
  */
 /**
@@ -27,7 +28,8 @@
  */
 ?>
 <?php
-class Ho_OfflineMaintenance_Model_System_Config_Arrayfield_Exclude extends Ho_OfflineMaintenance_Model_System_Config_Arrayfield
+class Ho_OfflineMaintenance_Model_System_Config_Arrayfield_Exclude
+    extends Ho_OfflineMaintenance_Model_System_Config_Arrayfield
 {
     protected $_helper = 'ho_offlinemaintenance/arrayfield_exclude';
 }
