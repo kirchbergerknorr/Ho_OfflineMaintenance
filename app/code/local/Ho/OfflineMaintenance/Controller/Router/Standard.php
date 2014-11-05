@@ -64,8 +64,8 @@ class Ho_OfflineMaintenance_Controller_Router_Standard
      */
     public function isAllowedToViewPage(Zend_Controller_Request_Http $request)
     {
-        if (Mage::helper('ho_offlinemaintenance')->isOffline()) {
-            return false;
+        if (! Mage::helper('ho_offlinemaintenance')->isOffline()) {
+            return true;
         }
 
         // Is developermode is enabled?
