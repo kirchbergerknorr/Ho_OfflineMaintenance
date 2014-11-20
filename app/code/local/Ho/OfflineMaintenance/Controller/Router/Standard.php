@@ -64,12 +64,20 @@ class Ho_OfflineMaintenance_Controller_Router_Standard
      */
     public function isAllowedToViewPage(Zend_Controller_Request_Http $request)
     {
-        if (! Mage::helper('ho_offlinemaintenance')->isOffline()) {
+        // Is developermode is enabled?
+        if (Mage::getIsDeveloperMode()) {
             return true;
         }
 
-        // Is developermode is enabled?
-        if (Mage::getIsDeveloperMode()) {
+        $transport = new Varien_Object();
+        $transport->setData('is_allowed', true);
+        Mage::dispatchEvent('ho_offlinemaintenance_is_allowed', array('transport' => $transport));
+        if (! $transport->getData('is_allowed')) {
+            return false;
+        }
+
+
+        if (! Mage::helper('ho_offlinemaintenance')->isOffline()) {
             return true;
         }
 
@@ -85,9 +93,7 @@ class Ho_OfflineMaintenance_Controller_Router_Standard
 
 
         // Is the path always allowed?
-        /** @var $excludeHelper Ho_OfflineMaintenance_Helper_Arrayfield_Exclude */
-        $excludeHelper = Mage::helper('ho_offlinemaintenance/arrayfield_exclude');
-        $excludePaths = $excludeHelper->getConfigValue();
+        $excludePaths = Mage::helper('ho_offlinemaintenance/arrayfield_exclude')->getConfigValue();
         $currentPath = Mage::app()->getRequest()->getPathInfo();
         $excluded = false;
         foreach ($excludePaths as $excludePath) {
